@@ -24,7 +24,7 @@ If the user names a scope, use it. Otherwise resolve in this priority order and 
 2. **Score** — score each category below 0–5, citing file:line evidence for anything above 1. Any single category at 5 is a blocker regardless of the average.
 3. **Propose** — present a fix list ordered delete → consolidate → rewrite, using the format below. **Stop and get explicit confirmation before editing anything.**
 4. **Apply** — only the confirmed items, in that order.
-5. **Verify & report** — run existing tests/build if available; state exactly what you deleted and changed.
+5. **Verify & report** — run existing tests/build if available; state exactly what you deleted and changed; then self-audit: *"what still looks AI-generated?"* (comment/PR tells, process leakage) and fix the remaining tells.
 
 ## Scoring rubric
 
@@ -46,9 +46,24 @@ Overall score = average of categories below. Any single category at 5 is a block
 | Legacy & dead branches | deprecated/legacy/compat code | old path kept "for safety" after a migration; commented-out or unreachable code |
 | Error honesty | catch blocks, broad excepts | swallowed exceptions, no logging, silent success on failure |
 | Duplication | new helpers/types vs. existing ones | a near-identical function already exists two directories away |
-| Comment/copy noise | comments, docstrings | narrates the diff ("now we check X"), restates the code, gives no *why* |
-| Docs audience fit | README, help text, 对客文档 vs. internal notes | customer-facing doc explains internal technical decisions, rejected alternatives, or decision history instead of usage |
+| Comment & process leakage | comments, docstrings, dead attempts | comment narrates the diff or restates code instead of giving a non-obvious *why*; intermediate attempts left in (exploratory code, superseded snippets, commented-out experiments); decision history (rejected alternatives, "we tried X first") written into code comments |
+| Docs & PR audience fit | README, help text, PR descriptions, 对客文档 vs. internal notes | customer-facing doc or PR description explains decision process (rejected alternatives, "never merged" states, attempt history) instead of final behavior |
 | Structural erosion | file/function size, ownership | one file or function knows every subsystem; god class/function |
+
+## Comment & PR discipline
+
+- **Comments: non-obvious reason only.** A comment must explain something the code doesn't (why not how). If it restates the code or narrates the change, delete it.
+- **No intermediate attempts.** Never keep superseded snippets, exploratory code, or "previous approach" blocks. The codebase shows only the final state.
+- **PR descriptions: final behavior only.** Describe what the code does now and any trade-off invisible in the diff (e.g. "chose X over Y because Z"). Never mention rejected alternatives, never-merged states, or how you got there. Decision history belongs in an ADR/changelog, not in the PR or the code.
+- **No decision-process leakage in code/docs/comments.** If a reader can reconstruct *how* the code was written (attempts, pivots, dead ends) from comments, docs, or the PR, that's slop.
+
+## AI tells in comments & PRs (borrowed from unslop)
+
+- AI vocabulary: *Additionally, crucial, delve, enhance, foster, intricate, landscape (abstract), pivotal, robust, seamless, showcase, underscore, vibrant*. Replace with plain words.
+- "Not just X, but Y." / rule of three / synonym cycling (pick one word and repeat it).
+- Em-dash overuse; chatbot phrases ("This PR enhances...", "Let me know if...", "Of course!").
+- Puffery and promotional words ("streamlined", "empowered", "groundbreaking") — state what happened, don't market it.
+- Self-audit after fixing: *"What still makes this look AI-generated?"* Fix remaining tells.
 
 ## Score report format (show before any proposal)
 
@@ -85,7 +100,7 @@ Wait for the user's answer before editing anything.
 - Delete before you add — most slop is inert; removing it changes no runtime behavior.
 - Collapse fallback chains to the one path that should run; make failure explicit (typed error or clear log), never a silent default.
 - When merging duplicates, keep the more-used or better-tested version and update its callers.
-- If a customer-facing doc has decision history worth keeping, move it into an internal note (ADR/changelog) instead of just deleting it.
+- If a customer-facing doc or PR description has decision history worth keeping, move it into an internal note (ADR/changelog) instead of just deleting it.
 - Never introduce a new env var, fallback, or shim while fixing — that's slop again.
 
 ## Rules
