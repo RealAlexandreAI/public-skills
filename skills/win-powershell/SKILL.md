@@ -1,7 +1,7 @@
 ---
 name: win-powershell
 version: 1.0.0
-display_name: Windows PowerShell
+display_name: Windows安全脚本
 display_name_en: Win PowerShell
 description: Windows command-execution guide for coding agents — always use PowerShell 7 (pwsh), never Windows PowerShell 5.1 (powershell.exe); use rg for text search and file enumeration; PowerShell-native syntax for quoting, here-strings, pipelines and exit-code checks. Trigger when generating or executing shell commands on Windows, or when the host shell is PowerShell / cmd / Git Bash / WSL and the agent might pick the wrong shell.
 description_zh: Windows 命令执行指引 —— 强制 PowerShell 7（禁用 powershell.exe / cmd / Git Bash / WSL 嵌套），单双引号与 here-string 规范，文本检索优先 rg，附 PowerShell 7 与 ripgrep 安装引导
