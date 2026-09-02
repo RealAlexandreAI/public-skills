@@ -3,8 +3,6 @@ name: cn-mirror
 description: 国内镜像换源指引 —— 当用户在国内需要给任何包管理器/下载源/SDK/系统仓库/网络基础设施配置加速时触发。覆盖 npm/pnpm/yarn、pip/uv/pipenv、cargo/crates.io、brew/bottles、docker、apt/debian/ubuntu、epel/centos/fedora、anaconda、github release/raw、gitlab、cocoapods、gem、go module、rustup、win-get、maven/gradle、nuget、alpine/arch、国内 DNS（阿里 223.5.5.5 / DNSPod 119.29.29.29 / 114DNS）、git 与 release 下载加速（ghfast.top / 1ms.run / gh-proxy / fastgit）、docker hub 加速（dockerproxy.cn）等。给出 MirrorZ Help 对应文档链接 + 探测环境后的适配命令（fish 用 set -gx / bash-zsh 用 export，无对应工具走官方通用流程）。触发词：换源、换镜像、加速、国内镜像、cn mirror、taobao 镜像、npmmirror、tuna、ustc、aliyun、tencent、清华源、镜像、DNS、ghfast、1ms、gh-proxy、dockerproxy、慢/超时/连不上 + 工具名（npm/pip/cargo/brew/docker/apt/git 等）。
 description_zh: 国内镜像换源
 description_en: CN mirror config
-disable: false
-agent_created: true
 ---
 
 # cn-mirror
@@ -151,7 +149,7 @@ networksetup -setdnsservers Wi-Fi 223.5.5.5 223.6.6.6
 scutil --dns | grep nameserver
 ```
 
-> 用途：GitHub/Docker/镜像站解析加速、抗 DNS 污染；配合 DoH（`dnscrypt-proxy` / Surge）效果更佳。
+> 用途：GitHub/Docker/镜像站解析加速、抗 DNS 污染；配合 DoH（`dnscrypt-proxy` 等）效果更佳。
 
 ## Git / Release / Docker 下载加速（ghfast / 1ms / gh-proxy 类）
 
