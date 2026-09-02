@@ -1,6 +1,11 @@
 ---
 name: no-slop
+version: 1.0.0
+display_name: 拒绝AI垃圾范
+display_name_en: No Slop
 description: Score, audit, and fix AI-generated slop in code, diffs, PRs, or docs in one pass — score each category 0-5 with file:line evidence, propose a fix list ordered delete → consolidate → rewrite, get explicit user confirmation, then apply. Use when asked to clean up, de-slop, fix slop, review, audit, grade, or check code/diffs/PRs/docs for AI slop, vibe-coded smell, or quality after AI generation.
+description_zh: 一次性给代码/PR/文档里的 AI 垃圾代码打分（0-5，附 file:line 证据），给出"先删后并再重写"的修复清单，确认后落地。触发词：清理、去 AI 味、代码审查、质量检查
+description_en: Score, audit, and fix AI-generated slop in code, diffs, PRs, or docs in one pass
 ---
 
 # No Slop

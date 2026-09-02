@@ -1,6 +1,11 @@
 ---
 name: bash-first
+version: 1.0.0
+display_name: Bash 优先
+display_name_en: Bash First
 description: Write every shell command in POSIX/bash syntax so it runs on any shell — critical when the user's interactive shell is fish or zsh, which reject bash-isms (heredocs, $( ), for..done loops, process substitution, ${} expansion, $?/$@/$!). Use whenever generating or executing shell commands, writing one-liners or multi-line scripts, or when the execution shell is not guaranteed to be bash.
+description_zh: 所有 shell 命令按 POSIX/bash 语法编写，保证在 fish/zsh 等宿主 shell 下不炸 —— 含 fish 陷阱清单与翻译速查表
+description_en: Write every shell command in POSIX/bash syntax so it runs on any shell
 ---
 
 # Bash-First
